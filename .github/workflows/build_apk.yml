@@ -25,9 +25,11 @@ jobs:
           channel: 'stable'
           flutter-version: '3.19.0'
 
-      - name: Instalar Dependências
+      - name: Gerar Esqueleto Android e Instalar Dependências
         working-directory: ./mobile_app
-        run: flutter pub get
+        run: |
+          flutter create . --org com.toptv.player
+          flutter pub get
 
       - name: Compilar APK (Release)
         working-directory: ./mobile_app
