@@ -28,8 +28,9 @@ jobs:
       - name: Criar Android e Liberar HTTP (Fix)
         working-directory: ./mobile_app
         run: |
+          # Recria a pasta Android
           flutter create . --org com.toptv.player
-          # A LINHA ABAIXO FORÇA O ANDROID A ACEITAR SEU SERVIDOR HTTP
+          # O COMANDO ABAIXO LIBERA A CONEXÃO COM SEU VPS (HTTP)
           sed -i 's/<application/<application android:usesCleartextTraffic="true"/g' android/app/src/main/AndroidManifest.xml
           flutter pub get
 
