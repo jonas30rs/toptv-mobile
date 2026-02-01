@@ -1,0 +1,40 @@
+name: Compilar TopTV APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar Código
+        uses: actions/checkout@v3
+
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Configurar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.19.0'
+
+      - name: Instalar Dependências
+        working-directory: ./mobile_app
+        run: flutter pub get
+
+      - name: Compilar APK (Release)
+        working-directory: ./mobile_app
+        run: flutter build apk --release --no-tree-shake-icons
+
+      - name: Upload do APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: toptv-app-release
+          path: mobile_app/build/app/outputs/flutter-apk/app-release.apk
