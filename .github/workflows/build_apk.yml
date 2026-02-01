@@ -25,11 +25,11 @@ jobs:
           channel: 'stable'
           flutter-version: '3.19.0'
 
-      - name: Gerar Android e Liberar HTTP (Hack de Segurança)
+      - name: Criar Android e Liberar HTTP (Fix)
         working-directory: ./mobile_app
         run: |
           flutter create . --org com.toptv.player
-          # A LINHA MÁGICA ABAIXO LIBERA O ACESSO AO SEU SERVIDOR
+          # A LINHA ABAIXO FORÇA O ANDROID A ACEITAR SEU SERVIDOR HTTP
           sed -i 's/<application/<application android:usesCleartextTraffic="true"/g' android/app/src/main/AndroidManifest.xml
           flutter pub get
 
