@@ -25,10 +25,12 @@ jobs:
           channel: 'stable'
           flutter-version: '3.19.0'
 
-      - name: Gerar Esqueleto Android e Instalar Dependências
+      - name: Gerar Android e Liberar HTTP (Hack de Segurança)
         working-directory: ./mobile_app
         run: |
           flutter create . --org com.toptv.player
+          # A LINHA MÁGICA ABAIXO LIBERA O ACESSO AO SEU SERVIDOR
+          sed -i 's/<application/<application android:usesCleartextTraffic="true"/g' android/app/src/main/AndroidManifest.xml
           flutter pub get
 
       - name: Compilar APK (Release)
