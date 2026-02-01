@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class AppConfigService with ChangeNotifier {
   // AJUSTE O IP AQUI PARA O IP DO SEU VPS/PC
-  final String _panelUrl = 'http://10.0.2.2:5000/api/v1/config'; 
+  final String _panelUrl = 'http://31.97.16.249:5000/api/v1/config'; 
 
   Map<String, dynamic>? _fullConfig;
   bool _isLoading = true;
@@ -36,4 +36,5 @@ class AppConfigService with ChangeNotifier {
       notifyListeners();
     }
   }
+
 }
